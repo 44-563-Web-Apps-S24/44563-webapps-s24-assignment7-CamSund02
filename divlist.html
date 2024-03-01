@@ -34,22 +34,40 @@
 		</p>
 		<input type="text" id="inputText" placeholder="Enter text">
 		<button onclick="addEnd()">Add end</button>
-	
+	    <button onclick="addFront()">Add front</button>
+		<button onclick="remove()">Remove</button>
 	
 </body>
 <script>
 	function addEnd() {
-		/* Get the value from the input element */
 		let inputValue = document.getElementById('inputText').value;
 
-		/* Make the div and set its properties */
 		let element = document.createElement("div");
 		element.innerHTML = inputValue;
 		element.className = "divlist";
 
-		/* Add it to the container at the end */
 		let container = document.getElementById('target');
 		container.appendChild(element);
+	}
+	function remove() {
+		let divListItems = document.getElementsByClassName("divlist");
+		let length = divListItems.length;
+
+		if (length > 0) {
+			let middleIndex = Math.floor(length / 2);
+			let container = document.getElementById('target');
+			container.removeChild(divListItems[middleIndex]);
+		}
+	function addFront() {
+            let inputValue = document.getElementById('inputText').value;
+
+            let element = document.createElement("div");
+            element.innerHTML = inputValue;
+            element.className = "divlist";
+
+            let container = document.getElementById('target');
+            container.insertBefore(element, container.firstChild);
+        }
 	}
 </script>
 </html>	
