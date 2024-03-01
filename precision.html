@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Your Name Speed Check</title>
+  <title>Cameron Sunderman Speed Check</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -11,14 +11,15 @@
 </head>
 <body>
 
-  <h2>Your Name Speed Check</h2>
+  <h2>Cameron Sunderman Speed Check</h2>
 
-  <button type="button" class="btn btn-primary" onclick="startTimer()">Start Timer</button>
+  <button type="button" class="btn btn-primary" onclick="startTime()">Start Timer</button>
   <button type="button" class="btn btn-danger" onclick="recordTime()">Stop Timer</button>
   
   <p id="target">Your time: 0 milliseconds</p>
   <p id="counter">Count: 0</p>
-  
+  <p id="countdown"></p>
+
   <script> 
     let stopTime = undefined;
 
@@ -26,21 +27,22 @@
       stopTime = Date.now();
       console.log(stopTime);
     }
-    
-    function startTimer() {
-      let count = 0;
-      const targetElement = document.getElementById('target');
-      const counterElement = document.getElementById('counter');
 
-      const intervalId = setInterval(() => {
-        count++;
-        counterElement.innerText = `Count: ${count}`;
-      }, 1);
+    function startTime() {
+      for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+          document.getElementById('countdown').innerHTML = i;
+        }, (4 - i) * 1000);
+      }
 
       setTimeout(() => {
-        clearInterval(intervalId);
-        targetElement.innerText = `Your time: ${count} milliseconds`;
-      }, 3000);
+        if (stopTime === undefined) {
+          document.getElementById('target').innerHTML = 'Too Slow';
+        } else {
+          const elapsedTime = stopTime - Date.now();
+          document.getElementById('target').innerHTML = `Time was ${Math.abs(elapsedTime)} milliseconds`;
+        }
+      }, 4000);
     }
   </script>
 
